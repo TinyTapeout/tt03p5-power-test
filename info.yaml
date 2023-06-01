@@ -21,14 +21,14 @@ yaml_version: 3.5
 #
 # Here is a great example: https://github.com/davidsiaw/tt02-davidsiaw-stackcalc/blob/38c5647f83aad2aec675d566aa3d67b98f0aac81/info.yaml
 documentation: 
-  author:       "Sylvain Munaut"      # Your name
-  title:        "TinyTapeout 3p5 Test"      # Project title
+  author:       "Matt Venn"      # Your name
+  title:        "TinyTapeout 3p5 Power Test"      # Project title
   language:     "Verilog" # other examples include Verilog, Amaranth, VHDL, etc
   description:  "Test module"      # Short description of what your project does
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
-      If input 0 is high, then a counter is output on the outputs and the bidirectional outputs. Otherwise the inputs are mirrored to the outputs.
+      Same as the tt_um_test, but with an PMOS controlling power. PMOS needs an external signal on the enable pin. Active low.
 
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
