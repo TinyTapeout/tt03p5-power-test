@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1685622571
+timestamp 1685633650
 << viali >>
 rect 11989 20553 12023 20587
 rect 13553 20553 13587 20587
@@ -22077,7 +22077,7 @@ timestamp 1676037725
 transform 1 0 17664 0 1 19584
 box -38 -48 314 592
 use power_switch  power_switch_0
-timestamp 1685622488
+timestamp 1685633567
 transform 1 0 3482 0 1 -4864
 box -2424 -1262 6226 3258
 << labels >>
