@@ -1,4 +1,4 @@
-module tt_um_test (clk,
+module tt_um_power_test (clk,
     ena,
     rst_n,
     vccd1,

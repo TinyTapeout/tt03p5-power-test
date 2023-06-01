@@ -1,5 +1,5 @@
 /*
- * tt_um_test.v
+ * tt_um_power_test.v
  *
  * Test user module
  *
@@ -8,7 +8,7 @@
 
 `default_nettype none
 
-module tt_um_test (
+module tt_um_power_test (
 	input  wire [7:0] ui_in,	// Dedicated inputs
 	output wire [7:0] uo_out,	// Dedicated outputs
 	input  wire [7:0] uio_in,	// IOs: Input path
@@ -38,4 +38,4 @@ module tt_um_test (
 	assign uio_out = ui_in[0] ? cnt : 8'h00;
 	assign uio_oe  = ui_in[0] ? 8'hff : 8'h00;
 
-endmodule // tt_um_test
+endmodule // tt_um_power_test
