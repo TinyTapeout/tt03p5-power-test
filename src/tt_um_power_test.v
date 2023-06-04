@@ -19,7 +19,7 @@ module tt_um_power_test (
 	input  wire       rst_n
 );
 
-	assign uo_out[8:0]  = ui_in[6:0] + uio_in[6:0];
+	assign uo_out[7:0]  = ui_in[6:0] + uio_in[6:0];
 	assign uio_oe  = 8'h00;
 
 endmodule // tt_um_power_test
