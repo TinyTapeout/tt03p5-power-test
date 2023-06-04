@@ -1,46 +1,21 @@
-# Including an Analog design in Caravel User Project
+# Add PFET to mag
 
-I made a simple PFET with Magic's pcells, and then wired it to short power and ground when the gate is driven low.
-
-* Power and Ground connections must be on metal 4.
-* Ports must be created correctly (see below) for each type of signal
-
-# Magic
-
-Start magic like this:
-
-    magic -d XR power_switch.mag -rcfile sky130A.magicrc 
-
-After drawing the MOSFET and labelling the ports with the menu text -> label option, I used these commands
-to create the ports and write the lef & gds.
-
-    port gate use signal
-    port vss use ground
-    port vcc use power
-
-    port gate class input
-    port vss class inout
-    port vcc class inout
-
-    lef write -hide
-    gds write power_switch.gds
-
-# Install instructions
-
-copy these files to the following subdirectories inside caravel_user_project:
-
-* power_switch.gds -> ./gds/
-* power_switch.lef -> ./lef/
-* macro.cfg -> ./openlane/user_project_wrapper/
-* config.json -> ./openlane/user_project_wrapper/
-* user_project_wrapper.v -> ./verilog/rtl/
-* power_switch.v -> ./verilog/rtl/
-
-run
-
-    make user_project_wrapper
-
-And the MOSFET should get included like this:
-
-![power_switch](power_switch.png)
-
+* Clone Harald's pfet into this directory: https://github.com/iic-jku/sky130_power_gate
+* Ensure PDK_ROOT is set correctly
+* Remove all the vccd1 labels and ports by editing the .mag file and removing the rlabel and port lines for each stripe. There were 4 in my design.
+* Open the tt_um_power_test.mag: magic tt_um_power_test.mag  -rcfile sky130A.magicrc
+* Add path in magic: addpath sky130_power_gate
+* Place an instance of the power_gate cell
+* Wire up the 4 ports. All ports are on m3. vdd vdd_switch vss en:
+  * draw a long vertical strip on m4 next to the design to pick up vdd and connect to vdd. need a v3 via
+  * connect all the bottoms of vccd1 of the design together and connect to vdd_switch
+  * connect en to some input pin (I used an unused input)
+  * connect vss to one of the vssd1 stripes of the design.
+* Setup the long vertical strip to be a port:
+  * select the long strip, then edit -> label, create a label called vssd1 and enable the port button
+  * type: 'port vccd1 use power' & then 'port vccd1 class inout'
+* Ensure no DRC errors
+* Ensure connectivity by selecting the new wires and repeatedly pressing s to highlight all connected parts
+* Write the lef: 'lef write -hide'
+* Write the gds: 'gds write power_switch.gds'
+* Copy the lef and gds to the correct paths
