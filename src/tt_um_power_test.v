@@ -19,23 +19,7 @@ module tt_um_power_test (
 	input  wire       rst_n
 );
 
-	reg rst_n_i;
-	reg [7:0] cnt;
-
-	always @(posedge clk or negedge rst_n)
-		if (~rst_n)
-			rst_n_i <= 1'b0;
-		else
-			rst_n_i <= 1'b1;
-
-	always @(posedge clk or negedge rst_n_i)
-		if (~rst_n_i)
-			cnt <= 0;
-		else
-			cnt <= cnt + 1;
-	
-	assign uo_out  = ui_in[0] ? cnt : uio_in;
-	assign uio_out = ui_in[0] ? cnt : 8'h00;
-	assign uio_oe  = ui_in[0] ? 8'hff : 8'h00;
+	assign uo_out[8:0]  = ui_in[6:0] + uio_in[6:0];
+	assign uio_oe  = 8'h00;
 
 endmodule // tt_um_power_test
